@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>購入履歴</title>
+</head>
+<body>
+	<h1>購入履歴</h1>
+	<table border="1">
+	  	<tr>
+	  		<td th:text="商品名"></td>
+	  		<td th:text="個数"></td>
+	  		<td th:text="価格"></td>
+	  		<td th:text="購入時間"></td>
+		</tr>
+		<tr th:each="purchaseHistoryList : ${purchaseHistoryList}">
+			<td th:text="${purchaseHistoryList.itemName}"></td>
+			<td th:text="${purchaseHistoryList.itemNum}"></td>
+			<td th:text="${purchaseHistoryList.purchasePrice}"></td>
+			<td th:text="${purchaseHistoryList.purchaseDate}"></td>
+		</tr>
+ 	</table>
+	<br>
+	<form action="#" th:action="@{/back}" th:object="${listForm}" method="post">
+		<input type="submit" name="back" value="戻る">
+	</form>
+</body>
+</html>

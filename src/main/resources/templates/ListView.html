@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>商品一覧</title>
+</head>
+<body>
+<span class="message" th:text="${message}"></span>
+<form action="#" th:action="@{/ListView}" th:object="${listForm}" method="post">
+  <p>商品一覧</p>
+  <table border="1">
+  	<tr>
+  		<td th:text="商品名"></td>
+  		<td th:text="価格"></td>
+ 	</tr>
+ 	<tr th:each="item, stat : ${itemList}">
+ 		<td th:text="${item.itemNm}"></td>
+ 		<td th:text="${item.price}"></td>
+ 	</tr>
+ </table>
+
+ 商品名:
+ <select name="name">
+ <option  th:each="item, stat : ${itemList}" th:value="${item.itemNm}" th:text="${item.itemNm}"></option>
+ </select>
+ 個数:
+ <input type="number" name="num" min="0" required>
+
+  <input type="submit" value="カートに追加" />
+</form>
+
+  <p>カートの中身</p>
+  <table border="1">
+  	<tr>
+  		<td th:text="商品名"></td>
+  		<td th:text="個数"></td>
+  		<td th:text="価格"></td>
+ 	</tr>
+ 	<tr th:each="cart : ${cart}">
+ 		<td th:text="${cart.name}"></td>
+ 		<td th:text="${cart.num}"></td>
+ 		<td th:text="${cart.price}"></td>
+ 	</tr>
+ 	<tr th:if=${totalItem}>
+ 		<td th:text="${totalItem['name']}"></td>
+ 		<td th:text="${totalItem['num']}"></td>
+ 		<td th:text="${totalItem['price']}"></td>
+	</tr>
+ </table>
+ <br>
+ <form action="#" th:action="@{/purchase}" th:object="${listForm}" method="post">
+ 	<input type="submit" neme="purchase" value="購入"/>
+ </form>
+ <br>
+ <form action="#" th:action="@{/purchaseHistory}" th:object="${listForm}" method="post">
+ 	<input type="submit" name="purchase_history" value="購入履歴" />
+</form>
+</body>
+</html>
